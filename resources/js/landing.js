@@ -40,6 +40,10 @@ function siteApp() {
     goToLogin() { window.location.href = '/users/login'; },
     goToRegister() { window.location.href = '/users/login'; },
     goToLoans() { window.location.href = '/ads/loadLoans'; },
+    goToGuide() { document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth', block: 'start' }); },
+    goToAbout() { document.getElementById('why-us')?.scrollIntoView({ behavior: 'smooth', block: 'start' }); },
+    goToContact() { document.getElementById('cta')?.scrollIntoView({ behavior: 'smooth', block: 'start' }); },
+    goToBlog() { window.location.href = '/'; },
 
     formatToman(n) { return Number(n).toLocaleString('en-US'); },
 

@@ -5,32 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>مشاهده همه آگهی های امتیاز وام | مستر وام</title>
 
-<link rel="stylesheet" href="<?= asset('build/assets/app-7BRzIV7R.css') ?>">
-<script defer src="<?= asset('cdn/alpinejs-3.14.1.min.js') ?>"></script>
-<script src="<?= asset('cdn/axios.min.js') ?>"></script>
 <link rel="stylesheet" href="<?= asset('cdn/Vazirmatn-font-face.css') ?>">
-
-<script>
-  tailwind.config = {
-    theme: {
-      extend: {
-        fontFamily: { vazir: ['Vazirmatn', 'sans-serif'] },
-        colors: {
-          teal: { 950:'#062825',900:'#0a3733',800:'#0d4a44',700:'#0e6a60',600:'#0f9c8c',500:'#14b3a0',400:'#3ecbb8',100:'#e3f7f3',50:'#f1fbf9' },
-          ink:  { 900:'#152238',800:'#1e2b44',600:'#4b5875',400:'#8592ab' }
-        },
-        keyframes: {
-          fadeUp: { '0%': { opacity:0, transform:'translateY(20px)' }, '100%': { opacity:1, transform:'translateY(0)' } },
-          shimmer: { '0%': { backgroundPosition:'-400px 0' }, '100%': { backgroundPosition:'400px 0' } },
-        },
-        animation: {
-          fadeUp: 'fadeUp .6s cubic-bezier(.22,1,.36,1) both',
-          shimmer: 'shimmer 1.4s infinite linear',
-        }
-      }
-    }
-  }
-</script>
+@vite(['resources/css/app.css', 'resources/css/landing.css', 'resources/js/app.js'])
 
 <style>
   html { scroll-behavior: smooth; }
@@ -78,46 +54,8 @@
 
 <body class="bg-white text-ink-900 antialiased" x-data="listingsApp()" x-init="init && init()">
 
-<!-- ============ HEADER (same as home page) ============ -->
-<header class="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-gray-100">
-  <div class="max-w-[1180px] mx-auto px-5 h-[76px] flex items-center justify-between">
-    <a href="/" class="flex items-center gap-2 shrink-0">
-      <span class="text-[19px] font-extrabold text-ink-900">مستر وام</span>
-      <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
-        <rect x="1" y="1" width="32" height="32" rx="9" fill="#0f9c8c"/>
-        <path d="M9 22V12l8-4 8 4v10" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M9 22h16" stroke="white" stroke-width="2" stroke-linecap="round"/>
-      </svg>
-    </a>
-
-    <nav class="hidden lg:flex items-center gap-8 text-[14.5px] text-ink-800 font-medium">
-      <a href="/" class="hover:text-teal-600 transition-colors">خانه</a>
-      <a href="#" class="text-teal-600 font-bold">آگهی ها</a>
-      <a href="#" class="hover:text-teal-600 transition-colors">راهنما</a>
-      <a href="#" class="hover:text-teal-600 transition-colors">درباره ما</a>
-      <a href="#" class="hover:text-teal-600 transition-colors">تماس با ما</a>
-      <a href="#" class="hover:text-teal-600 transition-colors">وبلاگ</a>
-    </nav>
-
-    <div class="flex items-center gap-3">
-      <button @click="goToRegister()" class="hidden sm:inline-flex text-[14px] font-semibold px-5 py-2.5 rounded-xl border border-gray-300 text-ink-800 hover:border-teal-500 hover:text-teal-600 transition-colors">ثبت نام</button>
-      <button @click="goToLogin()" class="text-[14px] font-semibold px-5 py-2.5 rounded-xl bg-ink-900 text-white hover:bg-teal-700 transition-colors">ورود</button>
-      <button class="lg:hidden p-2 text-ink-800" @click="mobileMenu = !mobileMenu">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/></svg>
-      </button>
-    </div>
-  </div>
-
-  <div x-cloak x-show="mobileMenu" x-transition class="lg:hidden border-t border-gray-100 px-5 py-4 flex flex-col gap-4 text-[14.5px] font-medium">
-    <a href="/">خانه</a>
-    <a href="#" class="text-teal-600 font-bold">آگهی ها</a>
-    <a href="#">راهنما</a>
-    <a href="#">درباره ما</a>
-    <a href="#">تماس با ما</a>
-    <a href="#">وبلاگ</a>
-    <button @click="goToRegister()" class="text-right border border-gray-300 rounded-xl py-2.5 font-semibold">ثبت نام</button>
-  </div>
-</header>
+<!-- ============ HEADER (shared component) ============ -->
+<?= view('components.landing.header')->render(); ?>
 
 <!-- ============ PAGE HEADING ============ -->
 <section class="max-w-[1180px] mx-auto px-5 pt-8 pb-4">
@@ -549,55 +487,8 @@
   </div>
 </section>
 
-<!-- ============ FOOTER (same as home page) ============ -->
-<footer class="border-t border-gray-100 bg-gray-50/60">
-  <div class="max-w-[1180px] mx-auto px-5 py-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
-    <div>
-      <div class="flex items-center gap-2 mb-3">
-        <span class="font-extrabold text-[17px] text-ink-900">مستر وام</span>
-        <svg width="28" height="28" viewBox="0 0 34 34" fill="none"><rect x="1" y="1" width="32" height="32" rx="9" fill="#0f9c8c"/><path d="M9 22V12l8-4 8 4v10" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </div>
-      <p class="text-[13px] text-ink-400 leading-7">پلتفرم خرید و فروش امتیاز وام بانک‌ها، بازار امن و شفاف برای معامله امتیازهای وام مازاد</p>
-      <div class="flex gap-3 mt-4">
-        <a href="#" class="w-8 h-8 rounded-full bg-white border border-gray-200 flex items-center justify-center hover:border-teal-500 transition-colors">in</a>
-        <a href="#" class="w-8 h-8 rounded-full bg-white border border-gray-200 flex items-center justify-center hover:border-teal-500 transition-colors">✈</a>
-        <a href="#" class="w-8 h-8 rounded-full bg-white border border-gray-200 flex items-center justify-center hover:border-teal-500 transition-colors">◎</a>
-      </div>
-    </div>
-
-    <div>
-      <p class="font-bold text-[14px] mb-4">خدمات</p>
-      <ul class="space-y-2.5 text-[13px] text-ink-400">
-        <li><a href="#" class="hover:text-teal-600">آگهی های وام مسکن</a></li>
-        <li><a href="#" class="hover:text-teal-600">آگهی های وام خودرو</a></li>
-        <li><a href="#" class="hover:text-teal-600">آگهی های وام شخصی</a></li>
-        <li><a href="#" class="hover:text-teal-600">آگهی های وام کسب و کار</a></li>
-      </ul>
-    </div>
-
-    <div>
-      <p class="font-bold text-[14px] mb-4">لینک های مفید</p>
-      <ul class="space-y-2.5 text-[13px] text-ink-400">
-        <li><a href="#" class="hover:text-teal-600">راهنما</a></li>
-        <li><a href="#" class="hover:text-teal-600">سوالات متداول</a></li>
-        <li><a href="#" class="hover:text-teal-600">قوانین و شرایط</a></li>
-        <li><a href="#" class="hover:text-teal-600">حریم خصوصی</a></li>
-      </ul>
-    </div>
-
-    <div>
-      <p class="font-bold text-[14px] mb-4">خبرنامه</p>
-      <p class="text-[13px] text-ink-400 leading-6 mb-3">برای دریافت آخرین آگهی ها و اخبار، ایمیل خود را وارد کنید</p>
-      <form class="flex gap-2" @submit.prevent>
-        <input type="email" placeholder="ایمیل خود را وارد کنید" class="flex-1 min-w-0 border border-gray-200 rounded-xl px-3 py-2 text-[13px] focus:outline-none focus:border-teal-500">
-        <button class="bg-ink-900 text-white text-[13px] font-semibold px-4 rounded-xl hover:bg-teal-700 transition-colors">عضویت</button>
-      </form>
-    </div>
-  </div>
-  <div class="border-t border-gray-100 py-5 text-center text-[12.5px] text-ink-400">
-    © ۱۴۰۳ مستر وام - تمامی حقوق محفوظ است
-  </div>
-</footer>
+<!-- ============ FOOTER (shared component) ============ -->
+<?= view('components.landing.footer')->render(); ?>
 
 <script>
 window.listingsApp = function listingsApp() {
@@ -729,8 +620,8 @@ window.listingsApp = function listingsApp() {
       this.fetchListings();
     },
 
-    goToLogin() { window.location.href = '/user/login'; },
-    goToRegister() { window.location.href = '/user/register'; },
+    goToLogin() { window.location.href = '/users/login'; },
+    goToRegister() { window.location.href = '/users/register'; },
 
     formatToman(n) { return Number(n).toLocaleString('en-US'); },
 

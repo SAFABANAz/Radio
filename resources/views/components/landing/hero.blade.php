@@ -11,7 +11,7 @@
             <button @click="goToLogin()" class="px-6 py-3.5 rounded-xl border-2 border-teal-600 text-teal-700 font-semibold text-[14.5px] hover:bg-teal-50 transition-colors">
                 ثبت آگهی فروش
             </button>
-            <a @click="loadloans()" class="btn-shine px-6 py-3.5 rounded-xl bg-teal-600 text-white font-semibold text-[14.5px] hover:bg-teal-700 transition-colors shadow-lg shadow-teal-600/20">
+            <a  href='' @click.prevent="goToLoans()"  class="btn-shine px-6 py-3.5 rounded-xl bg-teal-600 text-white font-semibold text-[14.5px] hover:bg-teal-700 transition-colors shadow-lg shadow-teal-600/20">
                 مشاهده آگهی ها
             </a>
         </div>
