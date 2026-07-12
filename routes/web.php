@@ -12,3 +12,7 @@ Route::get('/ads/loadLoans', function () {
     return view('ads.ads');
 });
 
+Route::get('/ads/detail', function () {
+    return view('ads.adsDetails');
+});
+

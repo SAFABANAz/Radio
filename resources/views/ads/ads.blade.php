@@ -457,7 +457,7 @@
             <p class="mt-3 font-extrabold text-[15px] text-ink-900" x-text="formatToman(loan.scorePrice) + ' تومان'"></p>
             <p class="text-[11.5px] text-ink-400 mt-0.5" x-text="'مبلغ وام: ' + formatToman(loan.loanAmount) + ' تومان'"></p>
             <p class="text-[12px] text-ink-400 mt-1" x-text="loan.city + '، ' + loan.province"></p>
-            <button @click="goToLogin()" class="mt-4 w-full text-center text-[13px] font-semibold py-2.5 rounded-xl border border-gray-200 hover:border-teal-500 hover:text-teal-700 transition-colors">
+            <button @click="goToListing(loan.id)" class="mt-4 w-full text-center text-[13px] font-semibold py-2.5 rounded-xl border border-gray-200 hover:border-teal-500 hover:text-teal-700 transition-colors">
               مشاهده جزئیات
             </button>
           </div>
@@ -622,6 +622,7 @@ window.listingsApp = function listingsApp() {
 
     goToLogin() { window.location.href = '/users/login'; },
     goToRegister() { window.location.href = '/users/register'; },
+    goToListing(id) { window.location.href = `/ads/detail?id=${id}`; },
 
     formatToman(n) { return Number(n).toLocaleString('en-US'); },
 
