@@ -16,3 +16,7 @@ Route::get('/ads/detail', function () {
     return view('ads.adsDetails');
 });
 
+Route::get('/dashboard', function () {
+    return view('ads.dashboard.dashboard');
+});
+
