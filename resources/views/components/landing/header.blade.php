@@ -19,18 +19,27 @@
         </nav>
 
         <div class="flex items-center gap-3">
-            <button @click="goToRegister()"
-                class="hidden sm:inline-flex text-[14px] font-semibold px-5 py-2.5 rounded-xl border border-gray-300 text-ink-800 hover:border-teal-500 hover:text-teal-600 transition-colors">
-                ثبت نام
-            </button>
-            <button @click="goToLogin()"
-                class="btn-shine text-[14px] font-semibold px-5 py-2.5 rounded-xl bg-ink-900 text-white hover:bg-teal-700 transition-colors">
-                ورود
-            </button>
+            <template x-if="!isAuthenticated">
+                <button @click="goToRegister()"
+                    class="hidden sm:inline-flex text-[14px] font-semibold px-5 py-2.5 rounded-xl border border-gray-300 text-ink-800 hover:border-teal-500 hover:text-teal-600 transition-colors">
+                    ثبت نام
+                </button>
+                <button @click="goToLogin()"
+                    class="btn-shine text-[14px] font-semibold px-5 py-2.5 rounded-xl bg-ink-900 text-white hover:bg-teal-700 transition-colors">
+                    ورود
+                </button>
+            </template>
+            <template x-if="isAuthenticated">
+                <button @click="goToDashboard()"
+                    class="btn-shine text-[14px] font-semibold px-5 py-2.5 rounded-xl bg-teal-600 text-white hover:bg-teal-700 transition-colors">
+                    پنل کاربری
+                </button>
+            </template>
             <button class="lg:hidden p-2 text-ink-800" @click="mobileMenu = !mobileMenu">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/></svg>
             </button>
         </div>
+
     </div>
 
     <div x-cloak x-show="mobileMenu" x-transition class="lg:hidden border-t border-gray-100 px-5 py-4 flex flex-col gap-4 text-[14.5px] font-medium">
@@ -40,6 +49,11 @@
         <a href="#" @click.prevent="goToAbout()">درباره ما</a>
         <a href="#" @click.prevent="goToContact()">تماس با ما</a>
         <a href="#" @click.prevent="goToBlog()">وبلاگ</a>
-        <button @click="goToRegister()" class="text-right border border-gray-300 rounded-xl py-2.5 font-semibold">ثبت نام</button>
+        <template x-if="!isAuthenticated">
+            <button @click="goToRegister()" class="text-right border border-gray-300 rounded-xl py-2.5 font-semibold">ثبت نام</button>
+        </template>
+        <template x-if="isAuthenticated">
+            <button @click="goToDashboard()" class="text-right bg-teal-600 text-white rounded-xl py-2.5 font-semibold">پنل کاربری</button>
+        </template>
     </div>
 </header>

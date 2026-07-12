@@ -3,6 +3,7 @@ function siteApp() {
     mobileMenu: false,
     loadingListings: true,
     listings: [],
+    isAuthenticated: false,
     counters: { ads: 0, deals: 0, banks: 0, volume: 0 },
     phoneListings: [
       { id: 1, title: 'وام مسکن - بانک ملت', score: 850, price: 120000000, color: 'bg-red-400' },
@@ -33,12 +34,37 @@ function siteApp() {
     ],
 
     init() {
+      this.checkAuthentication();
       this.animateCounters();
       this.fetchLatestListings();
     },
 
+    async checkAuthentication() {
+      try {
+        const { data } = await axios.get('/api/user', {
+          headers: { Accept: 'application/json' },
+        });
+        if (data && data.id) {
+          this.isAuthenticated = true;
+          this.user = data;
+        } else {
+          this.isAuthenticated = false;
+          this.user = null;
+        }
+      } catch (err) {
+        this.isAuthenticated = false;
+        this.user = null;
+      }
+    },
+
+    goToDashboard() { window.location.href = '/dashboard'; },
+
     goToLogin() { window.location.href = '/users/login'; },
-    goToRegister() { window.location.href = '/users/login'; },
+    goToRegister() { window.location.href = '/users/register'; },
+    logout() {
+      localStorage.removeItem('user_authenticated');
+      window.location.href = '/users/logout';
+    },
     goToLoans() { window.location.href = '/ads/loadLoans'; },
     goToGuide() { document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth', block: 'start' }); },
     goToAbout() { document.getElementById('why-us')?.scrollIntoView({ behavior: 'smooth', block: 'start' }); },
